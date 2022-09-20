@@ -3,6 +3,8 @@ package com.octopus.seriallist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +20,9 @@ import com.octopus.seriallist.data.SerialViewModel;
 public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
-
     private SerialViewModel serialViewModel;
+    private View delete;
+    Serial serial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         serialViewModel = new ViewModelProvider(this).get(SerialViewModel.class);
+        delete = findViewById(R.id.delete);
 
         serialViewModel.getAllTitle().observe(this, words -> {
             // Update the cached copy of the words in the adapter.
@@ -45,11 +49,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Serial serial = new Serial(data.getStringExtra(NewSerialActivity.EXTRA_REPLY));
+            Serial serial = new Serial(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, - 1));
             serialViewModel.insert(serial);
         } else {
             Toast.makeText(

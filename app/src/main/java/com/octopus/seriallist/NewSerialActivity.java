@@ -11,14 +11,17 @@ import android.widget.EditText;
 public class NewSerialActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.octopus.seriallist.REPLY";
+    public static final String EXTRA_REPLY2 = "com.octopus.seriallist.REPLY2";
 
     private EditText mEditWordView;
+    private EditText mEditWordView2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_serial);
         mEditWordView = findViewById(R.id.edit_word);
+        mEditWordView2 = findViewById(R.id.edit_word2);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(view -> {
@@ -27,7 +30,9 @@ public class NewSerialActivity extends AppCompatActivity {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
                 String word = mEditWordView.getText().toString();
+                int season = Integer.parseInt(mEditWordView2.getText().toString());
                 replyIntent.putExtra(EXTRA_REPLY, word);
+                replyIntent.putExtra(EXTRA_REPLY2,season);
                 setResult(RESULT_OK, replyIntent);
             }
             finish();

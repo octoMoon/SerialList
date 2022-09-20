@@ -25,4 +25,11 @@ public class SerialRepository {
             serialDao.insert(serial);
         });
     }
+
+    void delete(Serial serial){
+        SerialRoomDatabase.databaseWriteExecutor.execute(() ->{
+            serialDao.delete(serial);
+        });
+    }
+
 }

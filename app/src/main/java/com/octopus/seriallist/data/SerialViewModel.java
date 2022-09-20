@@ -18,11 +18,15 @@ public class SerialViewModel extends AndroidViewModel {
         allTitle = repository.getAllTitle();
     }
 
-    public LiveData<List<Serial>> getAllTitle(){
+    public LiveData<List<Serial>> getAllTitle() {
         return allTitle;
     }
 
-    public void insert(Serial serial){
+    public void insert(Serial serial) {
         repository.insert(serial);
+    }
+
+    public void delete(Serial serial) {
+        repository.delete(serial);
     }
 }

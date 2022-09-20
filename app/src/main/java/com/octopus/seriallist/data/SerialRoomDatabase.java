@@ -42,12 +42,8 @@ abstract class SerialRoomDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-
             databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more words, just add them.
                 SerialDao dao = INSTANCE.serialDao();
-                dao.deleteAll();
             });
         }
     };

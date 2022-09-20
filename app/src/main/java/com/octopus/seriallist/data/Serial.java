@@ -25,8 +25,9 @@ public class Serial {
     @ColumnInfo(name = "poster")
     private String poster;
 
-    public Serial(String title) {
+    public Serial(String title, int season) {
         this.title = title;
+        this.season = season;
 
     }
 
