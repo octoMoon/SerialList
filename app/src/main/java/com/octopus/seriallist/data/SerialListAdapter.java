@@ -1,23 +1,32 @@
 package com.octopus.seriallist.data;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.octopus.seriallist.R;
 
 public class SerialListAdapter extends ListAdapter<Serial, SerialViewHolder> {
 
 
     public SerialListAdapter(@NonNull DiffUtil.ItemCallback<Serial> diffCallback) {
         super(diffCallback);
+
     }
 
     @Override
     public SerialViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return SerialViewHolder.create(parent);
+        return new SerialViewHolder(
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.title_item, parent, false));
     }
 
     @Override

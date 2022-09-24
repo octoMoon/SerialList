@@ -1,5 +1,6 @@
 package com.octopus.seriallist.data;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,37 +10,42 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.octopus.seriallist.MainActivity;
+import com.octopus.seriallist.EpisodesActivity;
 import com.octopus.seriallist.NewSerialActivity;
 import com.octopus.seriallist.R;
 
 public class SerialViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView serialItemView;
-    private final View delete;
+    View delete;
     SerialViewModel serialViewModel;
     Serial serial;
+
 
 
     public SerialViewHolder(View itemView) {
         super(itemView);
         serialItemView = itemView.findViewById(R.id.textView);
         delete = itemView.findViewById(R.id.delete);
+        serialViewModel = new SerialViewModel(new Application());
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        delete.setOnClickListener(view -> serialViewModel.delete(serial));
+        serialItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                serialViewModel.delete(serial);
+                Intent intent = new Intent(view.getContext(), EpisodesActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
+
     }
+
+
 
     public void bind(Serial serial, int i) {
         this.serial = serial;
         String s = " season ";
         serialItemView.setText(serial.getTitle() + s + i);
-
-
     }
 
     static SerialViewHolder create(ViewGroup parent) {
