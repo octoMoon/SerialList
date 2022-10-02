@@ -1,4 +1,4 @@
-package com.octopus.seriallist;
+package com.octopus.seriallist.data.episode;
 
 public class Episode {
     public int id;

@@ -1,7 +1,6 @@
-package com.octopus.seriallist.data;
+package com.octopus.seriallist.data.serial;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.octopus.seriallist.EpisodesActivity;
-import com.octopus.seriallist.NewSerialActivity;
 import com.octopus.seriallist.R;
 
 public class SerialViewHolder extends RecyclerView.ViewHolder {
@@ -20,8 +18,6 @@ public class SerialViewHolder extends RecyclerView.ViewHolder {
     View delete;
     SerialViewModel serialViewModel;
     Serial serial;
-
-
 
     public SerialViewHolder(View itemView) {
         super(itemView);
@@ -33,14 +29,13 @@ public class SerialViewHolder extends RecyclerView.ViewHolder {
         serialItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int episodes = serial.getEpisodes();
                 Intent intent = new Intent(view.getContext(), EpisodesActivity.class);
+                intent.putExtra("episodes", episodes);
                 view.getContext().startActivity(intent);
             }
         });
-
     }
-
-
 
     public void bind(Serial serial, int i) {
         this.serial = serial;

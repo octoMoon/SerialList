@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.octopus.seriallist.data.Serial;
-import com.octopus.seriallist.data.SerialListAdapter;
-import com.octopus.seriallist.data.SerialViewHolder;
-import com.octopus.seriallist.data.SerialViewModel;
+import com.octopus.seriallist.data.serial.Serial;
+import com.octopus.seriallist.data.serial.SerialListAdapter;
+import com.octopus.seriallist.data.serial.SerialViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-
         serialViewModel = new ViewModelProvider(this).get(SerialViewModel.class);
 
         serialViewModel.getAllTitle().observe(this, words -> {
             adapter.submitList(words);
         });
+
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Serial serial = new Serial(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1));
+            Serial serial = new Serial(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1), data.getIntExtra(NewSerialActivity.EXTRA_REPLY3, -1));
             serialViewModel.insert(serial);
         } else {
             Toast.makeText(

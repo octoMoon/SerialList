@@ -1,4 +1,4 @@
-package com.octopus.seriallist.data;
+package com.octopus.seriallist.data.serial;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -13,6 +13,9 @@ import java.util.List;
 public interface SerialDao {
     @Query("SELECT * FROM serial_table ORDER BY title ASC")
     LiveData<List<Serial>> getAlphabetizedTitle();
+
+    @Query("SELECT * FROM serial_table WHERE id = :serialId")
+    Serial findById(int serialId);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Serial serial);

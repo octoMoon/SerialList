@@ -1,4 +1,4 @@
-package com.octopus.seriallist.data;
+package com.octopus.seriallist.data.serial;
 
 import android.app.Application;
 
@@ -9,6 +9,7 @@ import java.util.List;
 public class SerialRepository {
     private SerialDao serialDao;
     private LiveData<List<Serial>> allTitle;
+    private Serial serial;
 
     SerialRepository(Application application) {
         SerialRoomDatabase db = SerialRoomDatabase.getDatabase(application);
@@ -20,14 +21,18 @@ public class SerialRepository {
         return allTitle;
     }
 
-   void insert(Serial serial) {
+    Serial findById(int serialId){
+       return serial;
+    }
+
+    void insert(Serial serial) {
         SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
             serialDao.insert(serial);
         });
     }
 
-    void delete(Serial serial){
-        SerialRoomDatabase.databaseWriteExecutor.execute(() ->{
+    void delete(Serial serial) {
+        SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
             serialDao.delete(serial);
         });
     }

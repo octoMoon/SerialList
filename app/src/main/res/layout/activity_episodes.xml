@@ -4,16 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".EpisodesActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        app:srcCompat="@android:drawable/ic_menu_crop" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_episodes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:listitem="@layout/episode_item"
-        android:padding="@dimen/big_padding"
+        android:paddingTop="165dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

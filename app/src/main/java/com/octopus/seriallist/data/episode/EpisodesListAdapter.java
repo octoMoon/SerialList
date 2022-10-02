@@ -1,6 +1,5 @@
-package com.octopus.seriallist;
+package com.octopus.seriallist.data.episode;
 
-import android.content.Context;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.AsyncDifferConfig;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.octopus.seriallist.R;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class EpisodesListAdapter extends RecyclerView.Adapter<EpisodesListAdapter.EpisodesViewHolder> {
 
@@ -44,8 +41,6 @@ public class EpisodesListAdapter extends RecyclerView.Adapter<EpisodesListAdapte
 
     public static class EpisodesViewHolder extends RecyclerView.ViewHolder {
         TextView episodeView;
-        Episode episode;
-        boolean silentUpdate;
 
 
         public EpisodesViewHolder(View view) {
@@ -55,7 +50,6 @@ public class EpisodesListAdapter extends RecyclerView.Adapter<EpisodesListAdapte
                 @Override
                 public void onClick(View view) {
                     episodeView.setPaintFlags(episodeView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
                 }
             });
         }

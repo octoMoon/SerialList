@@ -1,8 +1,7 @@
-package com.octopus.seriallist.data;
+package com.octopus.seriallist.data.serial;
 
 import android.app.Application;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -20,6 +19,10 @@ public class SerialViewModel extends AndroidViewModel {
 
     public LiveData<List<Serial>> getAllTitle() {
         return allTitle;
+    }
+
+    public Serial findById(int id) {
+       return repository.findById(id);
     }
 
     public void insert(Serial serial) {

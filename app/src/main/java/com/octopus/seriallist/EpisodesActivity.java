@@ -1,21 +1,19 @@
 package com.octopus.seriallist;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.octopus.seriallist.data.SerialListAdapter;
-import com.octopus.seriallist.data.SerialViewModel;
+import com.octopus.seriallist.data.episode.Episode;
+import com.octopus.seriallist.data.episode.EpisodesListAdapter;
 
 import java.util.ArrayList;
 
 public class EpisodesActivity extends AppCompatActivity {
     ArrayList<Episode> episodes = new ArrayList<>();
-    Episode episode;
+    int intepisodes;
     RecyclerView.LayoutManager layoutManager;
     EpisodesListAdapter adapter;
 
@@ -31,16 +29,18 @@ public class EpisodesActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
     }
 
     private void setInitialData() {
-        Episode ep = new Episode(1,"Episode 1", false);
-        episodes.add(ep);
-        episodes.add(new Episode(2, "Episode 2", false));
-        episodes.add(new Episode(3, "Episode 3", false));
-        episodes.add(new Episode(4, "Episode 4", false));
+        Bundle arguments = getIntent().getExtras();
+        if (arguments != null) {
+            intepisodes = arguments.getInt("episodes");
+        }
 
+
+        for (int i = 1; i < intepisodes + 1; i++) {
+            episodes.add(new Episode(i, "Episode " + i, false));
+        }
     }
 }
 

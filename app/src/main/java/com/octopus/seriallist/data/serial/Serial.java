@@ -1,4 +1,4 @@
-package com.octopus.seriallist.data;
+package com.octopus.seriallist.data.serial;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -25,9 +25,10 @@ public class Serial {
     @ColumnInfo(name = "poster")
     private String poster;
 
-    public Serial(String title, int season) {
+    public Serial(String title, int season, int episodes) {
         this.title = title;
         this.season = season;
+        this.episodes = episodes;
 
     }
 
