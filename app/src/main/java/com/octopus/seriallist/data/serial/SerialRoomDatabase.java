@@ -8,25 +8,30 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.octopus.seriallist.data.episode.Episode;
+import com.octopus.seriallist.data.episode.EpisodeDao;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Serial.class}, version = 1, exportSchema = false)
-abstract class SerialRoomDatabase extends RoomDatabase {
+@Database(entities = {Serial.class, Episode.class}, version = 1, exportSchema = false)
+public abstract class SerialRoomDatabase extends RoomDatabase {
 
     abstract SerialDao serialDao();
 
+    public abstract EpisodeDao episodeDao();
+
     private static volatile SerialRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
+    public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static SerialRoomDatabase getDatabase(final Context context) {
+    public static SerialRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (SerialRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    SerialRoomDatabase.class, "serial_database")
+                                    SerialRoomDatabase.class, "3")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
@@ -40,8 +45,10 @@ abstract class SerialRoomDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             databaseWriteExecutor.execute(() -> {
-                SerialDao dao = INSTANCE.serialDao();
+                SerialDao sDao = INSTANCE.serialDao();
+                EpisodeDao eDao = INSTANCE.episodeDao();
             });
         }
     };
+
 }

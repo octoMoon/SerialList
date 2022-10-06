@@ -7,51 +7,45 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.octopus.seriallist.R;
+import com.octopus.seriallist.data.serial.Serial;
+import com.octopus.seriallist.data.serial.SerialViewHolder;
 
 import java.util.ArrayList;
 
-public class EpisodesListAdapter extends RecyclerView.Adapter<EpisodesListAdapter.EpisodesViewHolder> {
-
-    ArrayList<Episode> episodes;
+public class EpisodesListAdapter extends ListAdapter<Episode, EpisodeViewHolder> {
 
 
-    public EpisodesListAdapter(ArrayList<Episode> episodes) {
-        this.episodes = episodes;
+    public EpisodesListAdapter(@NonNull DiffUtil.ItemCallback<Episode> diffCallback) {
+        super(diffCallback);
     }
 
     @NonNull
     @Override
-    public EpisodesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new EpisodesViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.episode_item, parent, false));
+    public EpisodeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new EpisodeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.episode_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EpisodesViewHolder holder, int position) {
-        holder.episodeView.setText(episodes.get(position).name);
+    public void onBindViewHolder(@NonNull EpisodeViewHolder holder, int position) {
+        Episode current = getItem(position);
+        holder.bind(current);
     }
 
-    @Override
-    public int getItemCount() {
-        return episodes.size();
-    }
+    public static class EpisodeDiff extends DiffUtil.ItemCallback<Episode> {
 
+        @Override
+        public boolean areItemsTheSame(@NonNull Episode oldItem, @NonNull Episode newItem) {
+            return oldItem == newItem;
+        }
 
-    public static class EpisodesViewHolder extends RecyclerView.ViewHolder {
-        TextView episodeView;
-
-
-        public EpisodesViewHolder(View view) {
-            super(view);
-            episodeView = (TextView) view.findViewById(R.id.textView_episode);
-            episodeView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    episodeView.setPaintFlags(episodeView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                }
-            });
+        @Override
+        public boolean areContentsTheSame(@NonNull Episode oldItem, @NonNull Episode newItem) {
+            return oldItem.getNumber() == newItem.getNumber();
         }
     }
 }

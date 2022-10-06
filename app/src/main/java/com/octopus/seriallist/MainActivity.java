@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.octopus.seriallist.data.episode.Episode;
+import com.octopus.seriallist.data.episode.EpisodeViewModel;
 import com.octopus.seriallist.data.serial.Serial;
 import com.octopus.seriallist.data.serial.SerialListAdapter;
 import com.octopus.seriallist.data.serial.SerialViewModel;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private SerialViewModel serialViewModel;
+    private EpisodeViewModel episodeViewModel;
 
 
     @Override
@@ -31,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         serialViewModel = new ViewModelProvider(this).get(SerialViewModel.class);
+        episodeViewModel = new ViewModelProvider(this).get(EpisodeViewModel.class);
+
+        Episode episode = new Episode("SDSF",4,true);
+        episodeViewModel.insert(episode);
 
         serialViewModel.getAllTitle().observe(this, words -> {
             adapter.submitList(words);
+
         });
-
-
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -52,7 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Serial serial = new Serial(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1), data.getIntExtra(NewSerialActivity.EXTRA_REPLY3, -1));
+            Episode episode = new Episode(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1));
             serialViewModel.insert(serial);
+            episodeViewModel.insert(episode);
+
         } else {
             Toast.makeText(
                     getApplicationContext(),
