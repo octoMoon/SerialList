@@ -1,5 +1,6 @@
 package com.octopus.seriallist.data.episode;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.octopus.seriallist.EpisodesActivity;
 import com.octopus.seriallist.R;
 import com.octopus.seriallist.data.serial.Serial;
 import com.octopus.seriallist.data.serial.SerialViewHolder;

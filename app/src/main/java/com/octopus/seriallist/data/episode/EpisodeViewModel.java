@@ -26,6 +26,9 @@ public class EpisodeViewModel extends AndroidViewModel {
         return allEpisodes;
     }
 
+    public LiveData<List<Episode>> getAllById(String id) {return repository.getAllEpisodesById(id);}
+
+    public void update(Episode episode){ repository.update(episode);}
 
     public void insert(Episode episode) {
         repository.insert(episode);

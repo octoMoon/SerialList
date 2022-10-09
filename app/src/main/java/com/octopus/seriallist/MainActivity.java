@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
         serialViewModel = new ViewModelProvider(this).get(SerialViewModel.class);
         episodeViewModel = new ViewModelProvider(this).get(EpisodeViewModel.class);
 
-        Episode episode = new Episode("SDSF",4,true);
-        episodeViewModel.insert(episode);
-
         serialViewModel.getAllTitle().observe(this, words -> {
             adapter.submitList(words);
 
@@ -58,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Serial serial = new Serial(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1), data.getIntExtra(NewSerialActivity.EXTRA_REPLY3, -1));
-            Episode episode = new Episode(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1));
+            Episode episode = new Episode(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1), false);
             serialViewModel.insert(serial);
             episodeViewModel.insert(episode);
 

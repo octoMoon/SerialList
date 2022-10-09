@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -19,13 +20,16 @@ import com.octopus.seriallist.data.serial.SerialViewModel;
 import java.util.ArrayList;
 
 public class EpisodesActivity extends AppCompatActivity {
-   private EpisodeViewModel episodeViewModel;
+    public static final String EXTRA_POS = "title";
+    private EpisodeViewModel episodeViewModel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episodes);
+
+        String title = (String) getIntent().getExtras().get(EXTRA_POS);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview_episodes);
         final EpisodesListAdapter adapter = new EpisodesListAdapter(new EpisodesListAdapter.EpisodeDiff());
@@ -34,7 +38,7 @@ public class EpisodesActivity extends AppCompatActivity {
 
         episodeViewModel = new ViewModelProvider(this).get(EpisodeViewModel.class);
 
-        episodeViewModel.getAllEpisodes().observe(this, episodes -> {
+        episodeViewModel.getAllById(title).observe(this, episodes -> {
             adapter.submitList(episodes);
         });
 

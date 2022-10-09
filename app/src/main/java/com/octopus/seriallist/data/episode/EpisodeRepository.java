@@ -23,6 +23,10 @@ public class EpisodeRepository {
         return allEpisodes;
     }
 
+    LiveData<List<Episode>> getAllEpisodesById(String id) {
+        return episodeDao.loadAllByIds(id);
+    }
+
     void insert(Episode episode) {
         SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
             episodeDao.insert(episode);
@@ -32,6 +36,12 @@ public class EpisodeRepository {
     void delete(Episode episode) {
         SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
             episodeDao.delete(episode);
+        });
+    }
+
+    void update(Episode episode) {
+        SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
+            episodeDao.update(episode);
         });
     }
 

@@ -1,6 +1,7 @@
 package com.octopus.seriallist.data.episode;
 
 import android.app.Application;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,12 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
         episodeViewModel = new EpisodeViewModel(new Application());
     }
 
+
     public void bind(Episode episode) {
         this.episode = episode;
+        if (episode.isViewed()==true){
+            episodeItemView.setPaintFlags(episodeItemView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
         String s = "Episode ";
         episodeItemView.setText(s + episode.getNumber());
     }

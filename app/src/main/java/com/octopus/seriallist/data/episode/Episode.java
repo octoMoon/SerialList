@@ -9,10 +9,13 @@ import androidx.room.PrimaryKey;
 public class Episode {
 
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "id")
-    private String id;
+    private int id;
+
+    @ColumnInfo(name = "title_and_season")
+    private String titleAndSeason;
 
     @ColumnInfo(name = "number")
     private int number;
@@ -23,24 +26,26 @@ public class Episode {
     public Episode() {
     }
 
-    public Episode(@NonNull String id, int number, boolean viewed) {
-        this.id = id;
+    public Episode(String titleAndSeason, int number, boolean viewed) {
+        this.titleAndSeason = titleAndSeason;
         this.number = number;
         this.viewed = viewed;
     }
 
-    public Episode(@NonNull String id, int number) {
-        this.id = id;
-        this.number = number;
-    }
-
-    @NonNull
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTitleAndSeason() {
+        return titleAndSeason;
+    }
+
+    public void setTitleAndSeason(String titleAndSeason) {
+        this.titleAndSeason = titleAndSeason;
     }
 
     public int getNumber() {
@@ -51,7 +56,7 @@ public class Episode {
         this.number = number;
     }
 
-    public boolean getViewed() {
+    public boolean isViewed() {
         return viewed;
     }
 

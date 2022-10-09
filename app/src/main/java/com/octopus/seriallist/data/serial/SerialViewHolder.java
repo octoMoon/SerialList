@@ -29,11 +29,8 @@ public class SerialViewHolder extends RecyclerView.ViewHolder {
         serialItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int episodes = serial.getEpisodes();
-                String title = serial.getTitle();
                 Intent intent = new Intent(view.getContext(), EpisodesActivity.class);
-                intent.putExtra("episodes", episodes);
-                intent.putExtra("title", title);
+                intent.putExtra("title", serialItemView.getText().toString());
                 view.getContext().startActivity(intent);
             }
         });
@@ -42,7 +39,8 @@ public class SerialViewHolder extends RecyclerView.ViewHolder {
     public void bind(Serial serial, int i) {
         this.serial = serial;
         String s = " season ";
-        serialItemView.setText(serial.getTitle() + s + i);
+
+        serialItemView.setText(serial.getTitle());
     }
 
     static SerialViewHolder create(ViewGroup parent) {

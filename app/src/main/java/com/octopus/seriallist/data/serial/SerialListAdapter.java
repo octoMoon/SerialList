@@ -1,12 +1,15 @@
 package com.octopus.seriallist.data.serial;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
+import com.octopus.seriallist.EpisodesActivity;
 import com.octopus.seriallist.R;
 
 public class SerialListAdapter extends ListAdapter<Serial, SerialViewHolder> {
@@ -27,7 +30,17 @@ public class SerialListAdapter extends ListAdapter<Serial, SerialViewHolder> {
     public void onBindViewHolder(SerialViewHolder holder, int position) {
         Serial current = getItem(position);
         holder.bind(current, current.getSeason());
-   }
+        String title = getItem(position).getTitle();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), EpisodesActivity.class);
+                intent.putExtra(EpisodesActivity.EXTRA_POS, title);
+                view.getContext().startActivity(intent);
+            }
+        });
+
+    }
 
     public static class SerialDiff extends DiffUtil.ItemCallback<Serial> {
 
