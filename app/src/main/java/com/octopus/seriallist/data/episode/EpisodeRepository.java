@@ -4,8 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.octopus.seriallist.data.serial.Serial;
-import com.octopus.seriallist.data.serial.SerialRoomDatabase;
+import com.octopus.seriallist.data.SerialRoomDatabase;
 
 import java.util.List;
 

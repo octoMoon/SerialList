@@ -1,4 +1,4 @@
-package com.octopus.seriallist.data.serial;
+package com.octopus.seriallist.data;
 
 import android.content.Context;
 
@@ -10,6 +10,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.octopus.seriallist.data.episode.Episode;
 import com.octopus.seriallist.data.episode.EpisodeDao;
+import com.octopus.seriallist.data.serial.Serial;
+import com.octopus.seriallist.data.serial.SerialDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
