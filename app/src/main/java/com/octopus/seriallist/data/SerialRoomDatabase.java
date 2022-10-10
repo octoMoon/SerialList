@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 @Database(entities = {Serial.class, Episode.class}, version = 1, exportSchema = false)
 public abstract class SerialRoomDatabase extends RoomDatabase {
 
-    abstract SerialDao serialDao();
+    public abstract SerialDao serialDao();
 
     public abstract EpisodeDao episodeDao();
 
