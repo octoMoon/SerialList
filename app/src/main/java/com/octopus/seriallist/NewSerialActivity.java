@@ -32,10 +32,10 @@ public class NewSerialActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(mEditWordView.getText())) {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
-                String word = mEditWordView.getText().toString();
+                String title = mEditWordView.getText().toString();
                 int season = Integer.parseInt(mEditWordView2.getText().toString());
                 int episodes = Integer.parseInt(mEditWordView3.getText().toString());
-                replyIntent.putExtra(EXTRA_REPLY, word);
+                replyIntent.putExtra(EXTRA_REPLY, title);
                 replyIntent.putExtra(EXTRA_REPLY2,season);
                 replyIntent.putExtra(EXTRA_REPLY3,episodes);
                 setResult(RESULT_OK, replyIntent);

@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, NewSerialActivity.class);
@@ -55,9 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Serial serial = new Serial(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1), data.getIntExtra(NewSerialActivity.EXTRA_REPLY3, -1));
-            Episode episode = new Episode(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1), false);
             serialViewModel.insert(serial);
-            episodeViewModel.insert(episode);
+            int i =1;
+
+            while (i<=serial.getEpisodes()){
+                episodeViewModel.insert(new Episode(serial.getTitle()+serial.getSeason(), i, false));
+                i++;
+            }
 
         } else {
             Toast.makeText(
@@ -67,6 +70,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
 }

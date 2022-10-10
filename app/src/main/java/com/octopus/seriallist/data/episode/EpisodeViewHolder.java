@@ -22,6 +22,14 @@ public class EpisodeViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         episodeItemView = itemView.findViewById(R.id.textView_episode);
         episodeViewModel = new EpisodeViewModel(new Application());
+
+        episodeItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                episode.setViewed(true);
+                episodeViewModel.update(episode);
+            }
+        });
     }
 
 

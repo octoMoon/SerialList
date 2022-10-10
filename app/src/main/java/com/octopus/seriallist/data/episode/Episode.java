@@ -63,4 +63,5 @@ public class Episode {
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
     }
+
 }
