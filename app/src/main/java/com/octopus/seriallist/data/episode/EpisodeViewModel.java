@@ -28,6 +28,8 @@ public class EpisodeViewModel extends AndroidViewModel {
 
     public LiveData<List<Episode>> getAllById(String id) {return repository.getAllEpisodesById(id);}
 
+    public void deleteAll(String id){repository.deleteAll(id);}
+
     public void update(Episode episode){ repository.update(episode);}
 
     public void insert(Episode episode) {

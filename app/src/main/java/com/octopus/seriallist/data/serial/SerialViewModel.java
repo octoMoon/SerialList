@@ -21,13 +21,17 @@ public class SerialViewModel extends AndroidViewModel {
         return allTitle;
     }
 
-    public Serial findById(int id) {
-       return repository.findById(id);
-    }
+    public void updatePoster(int id, String poster) {repository.updatePoster(id, poster);}
+
+    public int isEmpty(String title, int season){return repository.isEmpty(title,season);}
+
+    public String selectPoster(int id) {return repository.selectPoster(id);}
 
     public void insert(Serial serial) {
         repository.insert(serial);
     }
+
+    public void update(Serial serial){repository.update(serial);}
 
     public void delete(Serial serial) {
         repository.delete(serial);

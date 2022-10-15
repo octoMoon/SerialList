@@ -31,11 +31,13 @@ public class SerialListAdapter extends ListAdapter<Serial, SerialViewHolder> {
         Serial current = getItem(position);
         holder.bind(current, current.getSeason());
         String title = getItem(position).getTitle() + getItem(position).getSeason();
+        int id = current.getId();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), EpisodesActivity.class);
                 intent.putExtra(EpisodesActivity.EXTRA_POS, title);
+                intent.putExtra(EpisodesActivity.EXTRA_POS_ID, id);
                 view.getContext().startActivity(intent);
             }
         });

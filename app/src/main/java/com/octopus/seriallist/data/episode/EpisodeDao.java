@@ -18,6 +18,9 @@ public interface EpisodeDao {
     @Query("SELECT * FROM episode_table WHERE title_and_season IN (:titleAndSeason)")
     LiveData<List<Episode>>loadAllByIds(String titleAndSeason);
 
+    @Query("DELETE FROM episode_table WHERE title_and_season IN (:titleAndSeason)")
+    void deleteAll(String titleAndSeason);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Episode episode);
 

@@ -32,6 +32,12 @@ public class EpisodeRepository {
         });
     }
 
+    void deleteAll(String id){
+        SerialRoomDatabase.databaseWriteExecutor.execute(()->{
+            episodeDao.deleteAll(id);
+        });
+    }
+
     void delete(Episode episode) {
         SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
             episodeDao.delete(episode);

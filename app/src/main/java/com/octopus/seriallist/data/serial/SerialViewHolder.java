@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.octopus.seriallist.EpisodesActivity;
 import com.octopus.seriallist.R;
+import com.octopus.seriallist.data.episode.EpisodeViewModel;
 
 public class SerialViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView serialItemView;
     View delete;
     SerialViewModel serialViewModel;
+    EpisodeViewModel episodeViewModel;
     Serial serial;
 
     public SerialViewHolder(View itemView) {
@@ -24,23 +26,21 @@ public class SerialViewHolder extends RecyclerView.ViewHolder {
         serialItemView = itemView.findViewById(R.id.textView);
         delete = itemView.findViewById(R.id.delete);
         serialViewModel = new SerialViewModel(new Application());
-
-        delete.setOnClickListener(view -> serialViewModel.delete(serial));
-        serialItemView.setOnClickListener(new View.OnClickListener() {
+        episodeViewModel = new EpisodeViewModel(new Application());
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), EpisodesActivity.class);
-                String titleId = serialItemView.getText().toString().replace(" season ","");
-                intent.putExtra("title",titleId );
-                view.getContext().startActivity(intent);
+                serialViewModel.delete(serial);
+                episodeViewModel.deleteAll(serial.getTitle()+serial.getSeason());
             }
         });
+
     }
 
     public void bind(Serial serial, int i) {
         this.serial = serial;
         String season = " season ";
-        serialItemView.setText(serial.getTitle() +season+ serial.getSeason());
+        serialItemView.setText(serial.getTitle() + season + serial.getSeason());
     }
 
     static SerialViewHolder create(ViewGroup parent) {
