@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             int i =1;
 
             while (i<=serial.getEpisodes()){
-                episodeViewModel.insert(new Episode(serial.getTitle()+serial.getSeason(), i, false));
+                episodeViewModel.insert(new Episode("id_"+serial.getTitle()+"_"+serial.getSeason()+"_id", i, false));
                 i++;
             }
 

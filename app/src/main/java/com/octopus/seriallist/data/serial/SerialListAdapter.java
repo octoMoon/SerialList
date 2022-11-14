@@ -30,7 +30,7 @@ public class SerialListAdapter extends ListAdapter<Serial, SerialViewHolder> {
     public void onBindViewHolder(SerialViewHolder holder, int position) {
         Serial current = getItem(position);
         holder.bind(current, current.getSeason());
-        String title = getItem(position).getTitle() + getItem(position).getSeason();
+        String title = "id_"+getItem(position).getTitle() +"_"+ getItem(position).getSeason()+"_id";
         int id = current.getId();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

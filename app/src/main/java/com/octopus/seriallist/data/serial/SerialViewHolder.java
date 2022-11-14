@@ -31,7 +31,7 @@ public class SerialViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 serialViewModel.delete(serial);
-                episodeViewModel.deleteAll(serial.getTitle()+serial.getSeason());
+                episodeViewModel.deleteAll("id_"+serial.getTitle()+"_"+serial.getSeason()+"_id");
             }
         });
 

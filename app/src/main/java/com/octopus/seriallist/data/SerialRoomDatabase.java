@@ -33,7 +33,7 @@ public abstract class SerialRoomDatabase extends RoomDatabase {
             synchronized (SerialRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    SerialRoomDatabase.class, "beta_0.3")
+                                    SerialRoomDatabase.class, "beta_1.0")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
