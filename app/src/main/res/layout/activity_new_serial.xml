@@ -22,7 +22,7 @@
         android:minHeight="@dimen/min_height"
         android:fontFamily="sans-serif-light"
         android:hint="season"
-        android:inputType="textAutoComplete"
+        android:inputType="number"
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp" />
 
@@ -33,7 +33,7 @@
         android:minHeight="@dimen/min_height"
         android:fontFamily="sans-serif-light"
         android:hint="episodes"
-        android:inputType="textAutoComplete"
+        android:inputType="number"
         android:layout_margin="@dimen/big_padding"
         android:textSize="18sp"  />
 

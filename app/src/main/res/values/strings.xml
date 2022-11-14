@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SerialList</string>
+    <string name="app_name">Anime Watcher</string>
     <string name="action_settings">Settings</string>
     <string name="hint_word">Word…</string>
     <string name="button_save">Save</string>
