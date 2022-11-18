@@ -1,10 +1,19 @@
 package com.octopus.seriallist;
 
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private SerialViewModel serialViewModel;
     private EpisodeViewModel episodeViewModel;
+    ImageView imageView;
 
 
     @Override
@@ -33,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+          imageView = findViewById(R.id.aqua);
         serialViewModel = new ViewModelProvider(this).get(SerialViewModel.class);
         episodeViewModel = new ViewModelProvider(this).get(EpisodeViewModel.class);
 
@@ -40,6 +51,26 @@ public class MainActivity extends AppCompatActivity {
             adapter.submitList(words);
 
         });
+
+
+        recyclerView.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+            public void onSwipeTop() {
+                Toast.makeText(MainActivity.this, "top", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeRight() {
+                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeLeft() {
+                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
+            }
+            public void onSwipeBottom() {
+                Toast.makeText(MainActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -49,16 +80,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Serial serial = new Serial(data.getStringExtra(NewSerialActivity.EXTRA_REPLY), data.getIntExtra(NewSerialActivity.EXTRA_REPLY2, -1), data.getIntExtra(NewSerialActivity.EXTRA_REPLY3, -1));
             serialViewModel.insert(serial);
-            int i =1;
+            int i = 1;
 
-            while (i<=serial.getEpisodes()){
-                episodeViewModel.insert(new Episode("id_"+serial.getTitle()+"_"+serial.getSeason()+"_id", i, false));
+            while (i <= serial.getEpisodes()) {
+                episodeViewModel.insert(new Episode("id_" + serial.getTitle() + "_" + serial.getSeason() + "_id", i, false));
                 i++;
             }
 
