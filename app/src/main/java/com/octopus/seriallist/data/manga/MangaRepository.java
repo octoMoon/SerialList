@@ -18,4 +18,26 @@ public class MangaRepository {
         mangaDao = db.mangaDao();
         allEpisodes = mangaDao.getAllEpisodes();
     }
+
+    LiveData<List<Manga>> getAllEpisodes() {
+        return allEpisodes;
+    }
+
+    void insert(Manga manga) {
+        SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mangaDao.insert(manga);
+        });
+    }
+
+    void update(Manga manga) {
+        SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mangaDao.update(manga);
+        });
+    }
+
+    void delete(Manga manga) {
+        SerialRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mangaDao.delete(manga);
+        });
+    }
 }

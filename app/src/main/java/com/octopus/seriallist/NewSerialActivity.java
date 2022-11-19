@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewSerialActivity extends AppCompatActivity {
 
@@ -33,11 +34,17 @@ public class NewSerialActivity extends AppCompatActivity {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
                 String title = mEditWordView.getText().toString();
-                int season = Integer.parseInt(mEditWordView2.getText().toString());
-                int episodes = Integer.parseInt(mEditWordView3.getText().toString());
-                replyIntent.putExtra(EXTRA_REPLY, title);
-                replyIntent.putExtra(EXTRA_REPLY2,season);
-                replyIntent.putExtra(EXTRA_REPLY3,episodes);
+                String temp = mEditWordView2.getText().toString();
+                String temp2 = mEditWordView3.getText().toString();
+                try {
+                    int season = Integer.parseInt(temp);
+                    int episodes = Integer.parseInt(temp2);
+                    replyIntent.putExtra(EXTRA_REPLY, title);
+                    replyIntent.putExtra(EXTRA_REPLY2, season);
+                    replyIntent.putExtra(EXTRA_REPLY3, episodes);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
+                }
                 setResult(RESULT_OK, replyIntent);
             }
             finish();
