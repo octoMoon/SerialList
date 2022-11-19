@@ -10,17 +10,19 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.octopus.seriallist.data.episode.Episode;
 import com.octopus.seriallist.data.episode.EpisodeDao;
+import com.octopus.seriallist.data.manga.Manga;
+import com.octopus.seriallist.data.manga.MangaDao;
 import com.octopus.seriallist.data.serial.Serial;
 import com.octopus.seriallist.data.serial.SerialDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Serial.class, Episode.class}, version = 1, exportSchema = false)
+@Database(entities = {Serial.class, Episode.class, Manga.class}, version = 1, exportSchema = false)
 public abstract class SerialRoomDatabase extends RoomDatabase {
 
     public abstract SerialDao serialDao();
-
+    public abstract MangaDao mangaDao();
     public abstract EpisodeDao episodeDao();
 
     private static volatile SerialRoomDatabase INSTANCE;
@@ -33,7 +35,7 @@ public abstract class SerialRoomDatabase extends RoomDatabase {
             synchronized (SerialRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    SerialRoomDatabase.class, "beta_1.0")
+                                    SerialRoomDatabase.class, "beta_1.1")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
@@ -49,6 +51,7 @@ public abstract class SerialRoomDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 SerialDao sDao = INSTANCE.serialDao();
                 EpisodeDao eDao = INSTANCE.episodeDao();
+                MangaDao mDao = INSTANCE.mangaDao();
             });
         }
     };
