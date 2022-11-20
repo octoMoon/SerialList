@@ -74,7 +74,7 @@ public class MangaListAdapter extends ListAdapter<Manga, MangaListAdapter.MangaV
                     mangaViewModel.delete(manga);
                 }
             });
-            
+
         }
 
         public void bind(Manga manga) {
