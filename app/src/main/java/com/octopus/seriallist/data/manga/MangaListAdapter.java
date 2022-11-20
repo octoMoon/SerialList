@@ -47,6 +47,8 @@ public class MangaListAdapter extends ListAdapter<Manga, MangaListAdapter.MangaV
     }
 
     class MangaViewHolder extends RecyclerView.ViewHolder {
+        View delete;
+        View addEpisodes;
         private final TextView mangaItemView;
         private MangaViewModel mangaViewModel;
         Manga manga;
@@ -54,14 +56,30 @@ public class MangaListAdapter extends ListAdapter<Manga, MangaListAdapter.MangaV
         public MangaViewHolder(@NonNull View itemView) {
             super(itemView);
             mangaItemView = itemView.findViewById(R.id.mangaTextView);
+            delete = itemView.findViewById(R.id.deleteManga);
+            addEpisodes = itemView.findViewById(R.id.addMangaEpisodes);
             mangaViewModel = new MangaViewModel(new Application());
 
+            addEpisodes.setOnClickListener(new View.OnClickListener() {
+               @Override
+                public void onClick(View view) {
+                  manga.setEpisodesNumber(manga.getEpisodesNumber() + 1);
+                 mangaViewModel.update(manga);
+                }
+            });
 
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mangaViewModel.delete(manga);
+                }
+            });
+            
         }
 
         public void bind(Manga manga) {
             this.manga = manga;
-            mangaItemView.setText(manga.getTitleName());
+            mangaItemView.setText(manga.getTitleName()+" "+manga.getEpisodesNumber()+" Episode");
         }
 
         MangaViewHolder create(ViewGroup parent) {

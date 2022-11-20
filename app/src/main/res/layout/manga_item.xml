@@ -24,46 +24,17 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/textView2"
+        app:layout_constraintRight_toRightOf="@id/addMangaEpisodes"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/serial_title"
-        android:layout_width="299dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="11"
-        android:textColor="@color/white"
-        android:textSize="22dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/mangaTextView"
-        app:layout_constraintRight_toRightOf="@id/editTextNumber"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextNumber"
-        style="@style/serial_title"
-        android:layout_width="299dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="2"
-        android:textColorHint="@color/white"
-        android:ems="10"
-        android:textColor="@color/white"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/textView2"
-        app:layout_constraintRight_toRightOf="@id/button"
-        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@+id/button"
+        android:id="@+id/addMangaEpisodes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/editTextNumber"
+        app:layout_constraintLeft_toLeftOf="@id/mangaTextView"
         app:layout_constraintRight_toRightOf="@id/deleteManga"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/stat_notify_more" />
@@ -75,7 +46,7 @@
         android:layout_marginLeft="8dp"
         app:srcCompat="@android:drawable/ic_menu_delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/button"
+        app:layout_constraintLeft_toLeftOf="@id/addMangaEpisodes"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
