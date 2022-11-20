@@ -15,22 +15,24 @@ import com.octopus.seriallist.R;
 
 public class MangaListAdapter extends ListAdapter<Manga, MangaListAdapter.MangaViewHolder> {
 
-    protected MangaListAdapter(@NonNull DiffUtil.ItemCallback<Manga> diffCallback) {
+    public MangaListAdapter(@NonNull DiffUtil.ItemCallback<Manga> diffCallback) {
         super(diffCallback);
     }
+
 
     @NonNull
     @Override
     public MangaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        return new MangaViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.manga_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MangaViewHolder holder, int position) {
-
+        Manga current = getItem(position);
+        holder.bind(current);
     }
 
-    public static class MangaDiff extends DiffUtil.ItemCallback<Manga>{
+    public static class MangaDiff extends DiffUtil.ItemCallback<Manga> {
 
 
         @Override
@@ -44,7 +46,7 @@ public class MangaListAdapter extends ListAdapter<Manga, MangaListAdapter.MangaV
         }
     }
 
-    class MangaViewHolder extends RecyclerView.ViewHolder{
+    class MangaViewHolder extends RecyclerView.ViewHolder {
         private final TextView mangaItemView;
         private MangaViewModel mangaViewModel;
         Manga manga;
@@ -57,12 +59,12 @@ public class MangaListAdapter extends ListAdapter<Manga, MangaListAdapter.MangaV
 
         }
 
-        public void bind(Manga manga){
+        public void bind(Manga manga) {
             this.manga = manga;
             mangaItemView.setText(manga.getTitleName());
         }
 
-        MangaViewHolder create(ViewGroup parent){
+        MangaViewHolder create(ViewGroup parent) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.manga_item, parent, false);
             return new MangaViewHolder(view);

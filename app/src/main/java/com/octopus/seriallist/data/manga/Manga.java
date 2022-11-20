@@ -22,9 +22,9 @@ public class Manga {
     public Manga() {
     }
 
-    public Manga(String titleName, int episodesNumber) {
+    public Manga(String titleName) {
         this.titleName = titleName;
-        this.episodesNumber = episodesNumber;
+
     }
 
     public int getId() {
