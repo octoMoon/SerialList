@@ -12,20 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:shadowColor="@color/white"
+        android:fontFamily="@font/merienda"
+        android:shadowColor="@color/purple"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="10"
-        android:text="Konosuba"
+        android:text="Boruto Chapter 1"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="italic"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@id/addMangaEpisodes"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
@@ -33,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/mangaTextView"
         app:layout_constraintRight_toRightOf="@id/deleteManga"
@@ -44,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         app:srcCompat="@android:drawable/ic_menu_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/addMangaEpisodes"

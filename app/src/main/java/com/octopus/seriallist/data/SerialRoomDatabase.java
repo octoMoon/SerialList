@@ -8,12 +8,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.octopus.seriallist.data.episode.Episode;
-import com.octopus.seriallist.data.episode.EpisodeDao;
-import com.octopus.seriallist.data.manga.Manga;
-import com.octopus.seriallist.data.manga.MangaDao;
-import com.octopus.seriallist.data.serial.Serial;
-import com.octopus.seriallist.data.serial.SerialDao;
+import com.octopus.seriallist.data.entity.Episode;
+import com.octopus.seriallist.data.dao.EpisodeDao;
+import com.octopus.seriallist.data.entity.Manga;
+import com.octopus.seriallist.data.dao.MangaDao;
+import com.octopus.seriallist.data.entity.Serial;
+import com.octopus.seriallist.data.dao.SerialDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -35,7 +35,7 @@ public abstract class SerialRoomDatabase extends RoomDatabase {
             synchronized (SerialRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    SerialRoomDatabase.class, "beta_1.1")
+                                    SerialRoomDatabase.class, "beta_1.4")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
